@@ -1,0 +1,108 @@
+<!-- display when message submitted successfully -->
+<p *ngIf="isValidFormSubmitted" [ngClass]="'success'" class="submit">
+	Form submitted successfully.
+</p>
+
+
+<form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)" style="width: 400px; margin: 250px 250px;">
+
+	<!-- Name -->
+	<label for="">Name</label>
+
+	<!-- <input name="name" class="form-control" [ngModel]="user.name" minlength="3" maxlength="190" #name="ngModel"
+		appForbiddenName="" required> -->
+
+	<!-- <div *ngIf="name.invalid && name.dirty  &&  !isValidFormSubmitted" [ngClass]="'error'">
+		<div *ngIf="name.errors.minlength">
+			<p class="warning"> Name must be at least 3 characters long.</p>
+		</div>
+		<div *ngIf="name.errors.maxlength">
+			Name input is more that 190 characters long.
+		</div>
+		<div *ngIf="name.errors.touched == null">
+			please enter full name again
+		</div>
+		<div *ngIf="name.errors.required">
+			Name cannot be null
+		</div>
+		<div *ngIf="name.errors.invalid">
+			Name is required
+		</div>
+	</div> -->
+	<input id="name" name="name" class="form-control" required minlength="4" maxlength={{max}} [(ngModel)]="user.name"
+		#name="ngModel" pattern="^\S*$">
+
+	<div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+
+		<div *ngIf="name.errors.required">
+			<p> name is required.</p>
+		</div>
+		<div *ngIf="name.errors.minlength">
+			<p>name must be at least 4 characters long.</p>
+		</div>
+		<div *ngIf="name.errors.maxlength">
+			<p>name must be at least ... characters long.</p>
+		</div>
+		<div *ngIf="name.errors?.pattern">
+			<p>name can't be more than two space</p>
+		</div>
+	</div>
+	<!-- Email/ -->
+	<!-- <div class="form-group"> -->
+	<label for="">Email</label>
+	<!-- <input id="email" name="email" class="form-control" [ngModel]="user.email" required maxlength="255" #email="ngModel"
+		pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" patterns="^\S*$" required>
+
+	<div *ngIf="email.errors && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
+		<div *ngIf="email.errors.required ">
+			email required.
+		</div>
+		<div *ngIf="email.errors.maxlength">
+			Email must max of 255.
+		</div>
+		<div *ngIf="email.errors?.pattern">
+			This is not a valid Email!!!
+		</div>
+		<div *ngIf="name.errors?.patterns">
+			<p>name can't be more than two space</p>
+		</div>
+	</div> -->
+	<!-- </div> -->
+
+	<input id="email" name="email" class="form-control" required maxlength="190" maxlength={{max}} [(ngModel)]="user.email"
+		#email="ngModel" pattern="^\S*$">
+
+	<div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+
+		<div *ngIf="email.errors.required">
+			<p> email is required.</p>
+		</div>
+		<div *ngIf="email.errors.minlength">
+			<p>email must be at least 4 characters long.</p>
+		</div>
+		<div *ngIf="email.errors.maxlength">
+			<p>email must be at least ... characters long.</p>
+		</div>
+		<div *ngIf="email.errors?.pattern">
+			<p>email can't be more than two space</p>
+		</div>
+	</div>
+
+
+	<!-- country -->
+	<div class="input-group mb-3">
+		<div class="country">
+			<label class="input-group-text" for="country">Country</label>
+		</div>
+		<select name="country">
+			<option selected>Choose...</option>
+			<option value="1">One</option>
+			<option value="2">Two</option>
+			<option value="3">Three</option>
+		</select>
+	</div>
+
+
+
+	<button type="submit" [disabled]="!userForm.valid" class="btn btn-primary">Submit</button>
+</form>
