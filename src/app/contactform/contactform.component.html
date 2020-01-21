@@ -1,108 +1,118 @@
 <!-- display when message submitted successfully -->
+
+<br>
+<br>
+<br>
+<br>
+
 <p *ngIf="isValidFormSubmitted" [ngClass]="'success'" class="submit">
 	Form submitted successfully.
 </p>
 
 
-<form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)" style="width: 400px; margin: 250px 250px;">
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="container">
+				<div class="row">
+				  <div class="col-6">
+					<div class="jumbotron" style="width: 500px;
+				}">
+					  <!-- <h2></h2> -->
+					  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+						
+						<div class="form-group">
+							<label for="password">Name</label>
+							<input type="name" class="form-control" [(ngModel)]="model.password" #name="ngModel" maxlength="8" [ngClass]="{'is-invalid':f.submitted && name.invalid}" name="name" required minlength="3" />
+							<div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
+							  <div *ngIf="name.errors.required"> Name is required</div>
+							  <div *ngIf="name.errors.minlength"> must be at least 3 characters</div>
+							  <div *ngIf="name.errors.maxlength"> must be at max 150 characters</div>
+							</div>
+						  </div>
 
-	<!-- Name -->
-	<label for="">Name</label>
+						  
+						<div class="form-group">
+						  <label for="email">Email</label>
+						  <input type="text" class="form-control" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{'is-invalid':f.submitted && email.invalid}" name="email" required email />
+						  <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+							<div *ngIf="email.errors.required">Email Name is required</div>
+							<div *ngIf="email.errors.email">Email must be a valid email Address</div>
+						  </div>
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label for="inputState">Country</label>
+							<select id="inputState" class="form-control" style="width:400px;">
+								<option>------------</option>
+								<option selected *ngFor="let count of country">{{count.name}}</option>
+								
+							</select>
+						</div>
 
-	<!-- <input name="name" class="form-control" [ngModel]="user.name" minlength="3" maxlength="190" #name="ngModel"
-		appForbiddenName="" required> -->
+						<div class="form-group">
+						  <button class="btn btn-primary" >Submit</button>
+						</div>
+					  </form>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  
 
-	<!-- <div *ngIf="name.invalid && name.dirty  &&  !isValidFormSubmitted" [ngClass]="'error'">
-		<div *ngIf="name.errors.minlength">
-			<p class="warning"> Name must be at least 3 characters long.</p>
 		</div>
-		<div *ngIf="name.errors.maxlength">
-			Name input is more that 190 characters long.
-		</div>
-		<div *ngIf="name.errors.touched == null">
-			please enter full name again
-		</div>
-		<div *ngIf="name.errors.required">
-			Name cannot be null
-		</div>
-		<div *ngIf="name.errors.invalid">
-			Name is required
-		</div>
-	</div> -->
-	<input id="name" name="name" class="form-control" required minlength="4" maxlength={{max}} [(ngModel)]="user.name"
-		#name="ngModel" pattern="^\S*$">
+		<div class="col-md-6">
+			<p style="margin-left: 50%;"> user informations</p>
+			<div style="margin-left: 35%;">
 
-	<div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+				<!-- <p>Destination name:  {{names.owner.name}}</p> -->
+				<!-- <p>Destination name:  {{names.destination.name}}</p> -->
+				<!-- <div>{{names.source.name}}</div> -->
+				<table class="table">
+					<thead>
+					  <tr>
+						<th scope="col">Customer name</th>
+						<th scope="col">destination name</th>
+						<th scope="col">source name</th>
+						<th scope="col">Cost</th>
+						
+					  </tr>
+					</thead>
+					<tbody *ngFor="let names of data" >
+					  <tr>
+						<th scope="row">{{names.owner.name}}</th>
+						<td>{{names.destination.name}}</td>
+						<td>{{names.source.name}}</td>
+						<td>{{names.cost.amount}}</td>
+						
+					  </tr>
+					  <tr>
+						<th scope="row">2</th>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					  </tr>
+					  <tr>
+						<th scope="row">3</th>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+					  </tr>
+					</tbody>
+				  </table>
+			  </div> 
+		</div>
+	</div> 
+</div>
+<!-- <div *ngFor="let names of data">
 
-		<div *ngIf="name.errors.required">
-			<p> name is required.</p>
-		</div>
-		<div *ngIf="name.errors.minlength">
-			<p>name must be at least 4 characters long.</p>
-		</div>
-		<div *ngIf="name.errors.maxlength">
-			<p>name must be at least ... characters long.</p>
-		</div>
-		<div *ngIf="name.errors?.pattern">
-			<p>name can't be more than two space</p>
-		</div>
-	</div>
-	<!-- Email/ -->
-	<!-- <div class="form-group"> -->
-	<label for="">Email</label>
-	<!-- <input id="email" name="email" class="form-control" [ngModel]="user.email" required maxlength="255" #email="ngModel"
-		pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" patterns="^\S*$" required>
+	<div> {{names.destination.name}}</div>
+  
+	<div>{{names.source.name}}</div>
+  </div> -->
 
-	<div *ngIf="email.errors && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
-		<div *ngIf="email.errors.required ">
-			email required.
-		</div>
-		<div *ngIf="email.errors.maxlength">
-			Email must max of 255.
-		</div>
-		<div *ngIf="email.errors?.pattern">
-			This is not a valid Email!!!
-		</div>
-		<div *ngIf="name.errors?.patterns">
-			<p>name can't be more than two space</p>
-		</div>
-	</div> -->
-	<!-- </div> -->
+<!-- 
+  <div *ngFor="let count of country">
 
-	<input id="email" name="email" class="form-control" required maxlength="190" maxlength={{max}} [(ngModel)]="user.email"
-		#email="ngModel" pattern="^\S*$">
-
-	<div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-
-		<div *ngIf="email.errors.required">
-			<p> email is required.</p>
-		</div>
-		<div *ngIf="email.errors.minlength">
-			<p>email must be at least 4 characters long.</p>
-		</div>
-		<div *ngIf="email.errors.maxlength">
-			<p>email must be at least ... characters long.</p>
-		</div>
-		<div *ngIf="email.errors?.pattern">
-			<p>email can't be more than two space</p>
-		</div>
-	</div>
-
-
-	<!-- country -->
-	<div class="input-group mb-3">
-		<div class="country">
-			<label class="input-group-text" for="country">Country</label>
-		</div>
-		<select name="country">
-			<option selected>Choose...</option>
-			<option value="1">One</option>
-			<option value="2">Two</option>
-			<option value="3">Three</option>
-		</select>
-	</div>
-
-
-
-	<button type="submit" [disabled]="!userForm.valid" class="btn btn-primary">Submit</button>
-</form>
+	<div> {{count.name}}</div>
+    </div>  -->

@@ -10,28 +10,44 @@ import { DataService } from '../data.service';
   styleUrls: ['./contactform.component.css']
 })
 export class ContactformComponent implements OnInit {
+  constructor(private userService: UserService, private dataService: DataService) { }
   isValidFormSubmitted = false;
   user = new User();
-  data: any;
-
+  data: [] = []; // storing user information from 
+  country: [] = []; //storting country data from api
   max = 10;
-  constructor(private userService: UserService, private dataService: DataService,) { }
 
-  displayData(){
-    this.dataService.getDatas().subscribe(x =>{
-      this.data =x;
-      console.log(this.data)
-    })
+  countryApi  =
+  {
+    country: '',
+  };
+
+  onSubmit(){
+    console.log('goo')
+  }
+
+  model:any ={}
+
+  // function to dsiplay user data
+  displayData() {
+    this.dataService.getDatas().subscribe(x => {
+      this.data = x.payload.items;
+      console.log(this.data);
+    });
+
 }
 
-  countryApi  = 
-  {
-    country:'', 
-  }
+displayCountries(){
+  this.dataService.getCountries().subscribe(y => {
+    this.country = y.payload.items;
+    console.log('---',this.country)
+  })
+}
 
 
   ngOnInit() {
-    this.displayData()
+    this.displayData();
+    this.displayCountries();
   }
 
 

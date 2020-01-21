@@ -6,6 +6,8 @@ import { HttpClient,HttpHeaders , HttpErrorResponse } from '@angular/common/http
 })
 
 export class DataService {
+  countryApi = 'http://18.191.141.83/v1/countries';
+
   data;
   // api = 'https://jsonplaceholder.typicode.com/posts';
   apis = 'http://18.191.141.83/v1/users/237/deliveries?sorting=id:desc';
@@ -26,10 +28,14 @@ export class DataService {
     headers: new HttpHeaders(this.headerDict) 
   };
 
-    //  headers = new HttpHeaders().set("X-CustomeHeader", "B2A8AA92FE13A3FFD83FEF159A47A7E8")
-  
+  // Read user data
   getDatas (){
        return this.http.get(this.apis, this.requestOptions );
+  }
+
+  // read country data/
+  getCountries(){
+    return this.http.get(this.countryApi, this.requestOptions)
   }
 }
 
