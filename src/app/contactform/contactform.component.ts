@@ -24,15 +24,11 @@ export class ContactformComponent implements OnInit {
     this.selectedCountry = newValue;
 
   }
-  // selectCountry = null;
-
-  // onSubmit(){
-  //   console.log('goo')
-  // }
+  
 
   model:any ={}
 
-  // function to dsiplay user data
+  // methos to dsiplay user data
   displayData() {
     this.dataService.getDatas().subscribe(x => {
       this.data = x.payload.items;
@@ -41,6 +37,7 @@ export class ContactformComponent implements OnInit {
 
 }
 
+// method to display  countries
 displayCountries(){
   this.dataService.getCountries().subscribe(y => {
     this.country = y.payload.items;

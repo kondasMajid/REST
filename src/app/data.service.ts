@@ -9,7 +9,7 @@ export class DataService {
   countryApi = 'http://18.191.141.83/v1/countries';
 
   data;
-  // api = 'https://jsonplaceholder.typicode.com/posts';
+
   apis = 'http://18.191.141.83/v1/users/237/deliveries?sorting=id:desc';
 
   token = 'klloyds-user-token';
@@ -33,16 +33,7 @@ export class DataService {
        return this.http.get(this.apis, this.requestOptions );
   }
 
-  // read country data/
   getCountries(){
     return this.http.get(this.countryApi, this.requestOptions)
   }
 }
-
-
-  
-// getDatas (){
-//   return this.http.get(this.apis,  { headers: new HttpHeaders({'Authorization': this.token  + this.value})
-//  });
-
-// }
