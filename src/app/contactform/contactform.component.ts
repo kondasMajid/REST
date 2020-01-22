@@ -14,7 +14,7 @@ export class ContactformComponent implements OnInit {
 
   isValidFormSubmitted = false;
   user = new User();
-  data: [] = []; // storing user information from 
+  data: [] = []; // storing user information from api
   country: [] = []; //storting country data from api
   max = 10;
 
@@ -41,7 +41,7 @@ export class ContactformComponent implements OnInit {
 displayCountries(){
   this.dataService.getCountries().subscribe(y => {
     this.country = y.payload.items;
-    console.log('---', this.country)
+    console.log('--', this.country)
   })
 }
 
