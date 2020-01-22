@@ -15,50 +15,79 @@
 		<div class="col-md-6">
 			<div class="container">
 				<div class="row">
-				  <div class="col-6">
-					<div class="jumbotron" style="width: 500px;
-				}">
-					  <!-- <h2></h2> -->
-					  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-						
-						<div class="form-group">
-							<label for="password">Name</label>
-							<input type="name" class="form-control" [(ngModel)]="model.password" #name="ngModel" maxlength="8" [ngClass]="{'is-invalid':f.submitted && name.invalid}" name="name" required minlength="3" />
-							<div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
-							  <div *ngIf="name.errors.required"> Name is required</div>
-							  <div *ngIf="name.errors.minlength"> must be at least 3 characters</div>
-							  <div *ngIf="name.errors.maxlength"> must be at max 150 characters</div>
-							</div>
-						  </div>
+					<div class="col-6">
+						<div class="jumbotron" style="width: 500px">
+							<!-- <h2></h2> -->
+							<!-- <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate> -->
+							<form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)"
+								style="width: 400px; margin: 30px;">
 
-						  
-						<div class="form-group">
-						  <label for="email">Email</label>
-						  <input type="text" class="form-control" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{'is-invalid':f.submitted && email.invalid}" name="email" required email />
-						  <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
-							<div *ngIf="email.errors.required">Email Name is required</div>
-							<div *ngIf="email.errors.email">Email must be a valid email Address</div>
-						  </div>
-						</div>
-						
-						<div class="form-group col-md-4">
-							<label for="inputState">Country</label>
-							<select id="inputState" class="form-control" style="width:400px;">
-								<option>------------</option>
-								<option selected *ngFor="let count of country">{{count.name}}</option>
+								<div class="form-group">
+									<label for="name">name</label>
+									<input id="name" name="name" class="form-control" required minlength="4"
+										appForbiddenName="bob" [(ngModel)]="user.name" #name="ngModel">
+									<div *ngIf="name.invalid && (name.dirty || name.touched)"
+										class="alert alert-danger">
+										<div *ngIf="name.errors.required">
+											Name is required.
+										</div>
+										<div *ngIf="name.errors.minlength">
+											Name must be at least 4 characters long.
+										</div>
+										<!-- <div *ngIf="name.errors.forbiddenName">
+										Name cannot be Bob.
+									</div> -->
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="email">Email</label>
+									<input id="email" name="email" class="form-control" required maxlength="120"
+										appForbiddenName="bob" [(ngModel)]="user.email" #email="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+									<div *ngIf="email.invalid && (email.dirty || email.touched)"
+										class="alert alert-danger">
+										<div *ngIf="email.errors.required">
+											Email is required.
+										</div>
+										<div *ngIf="email.errors.maxlength">
+											Email must be at least 120 characters long.
+										</div>
+										<div *ngIf="email.errors.pattern">
+										email not valid
+									</div>
+									</div>
+								</div>
+								<br>
 								
-							</select>
-						</div>
+								<!-- <div class="form-group col-md-4">
+									<label for="inputState">Country</label>
+									<select id="inputState" class="form-control" style="width:400px;">
+										<option value="null">Select country</option>
+										<option  *ngFor="let count of country">{{count.name}}</option>
+										
+									</select>
+								</div>
 
-						<div class="form-group">
-						  <button class="btn btn-primary" >Submit</button>
+								<button type="submit" [disabled]="!userForm.valid"
+									class="btn btn-primary">Submit</button> -->
+
+									<div class="form-group col-md-4">
+										<label for="inputState">Country</label>
+										<select (ngModelChange)="onChange($event)"  [ngModel]="selectedCountry" [ngModelOptions]="{standalone: true}" id="inputState" class="form-control" style="width:400px;">
+							<option value="" selected></option>
+											<option  *ngFor="let count of country"> {{count.name}}</option>
+			
+										</select>
+									</div>
+			
+									<div class="form-group">
+									  <button class="btn btn-primary" [disabled]="(email.invalid || name.invalid || selectedCountry==='')">Submit</button>
+									</div>
+							</form>
 						</div>
-					  </form>
 					</div>
-				  </div>
 				</div>
-			  </div>
-			  
+			</div>
+
 
 		</div>
 		<div class="col-md-6">
@@ -70,49 +99,26 @@
 				<!-- <div>{{names.source.name}}</div> -->
 				<table class="table">
 					<thead>
-					  <tr>
-						<th scope="col">Customer name</th>
-						<th scope="col">destination name</th>
-						<th scope="col">source name</th>
-						<th scope="col">Cost</th>
-						
-					  </tr>
+						<tr>
+							<th scope="col">Customer name</th>
+							<th scope="col">destination name</th>
+							<th scope="col">source name</th>
+							<th scope="col">Cost</th>
+
+						</tr>
 					</thead>
-					<tbody *ngFor="let names of data" >
-					  <tr>
-						<th scope="row">{{names.owner.name}}</th>
-						<td>{{names.destination.name}}</td>
-						<td>{{names.source.name}}</td>
-						<td>{{names.cost.amount}}</td>
-						
-					  </tr>
-					  <tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
-					  </tr>
-					  <tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>@twitter</td>
-					  </tr>
+					<tbody *ngFor="let names of data">
+						<tr>
+							<th scope="row">{{names.owner.name}}</th>
+							<td>{{names.destination.name}}</td>
+							<td>{{names.source.name}}</td>
+							<td>{{names.cost.amount}}</td>
+
+						</tr>
+
 					</tbody>
-				  </table>
-			  </div> 
+				</table>
+			</div>
 		</div>
-	</div> 
+	</div>
 </div>
-<!-- <div *ngFor="let names of data">
-
-	<div> {{names.destination.name}}</div>
-  
-	<div>{{names.source.name}}</div>
-  </div> -->
-
-<!-- 
-  <div *ngFor="let count of country">
-
-	<div> {{count.name}}</div>
-    </div>  -->

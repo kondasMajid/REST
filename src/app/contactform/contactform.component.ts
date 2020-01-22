@@ -11,20 +11,24 @@ import { DataService } from '../data.service';
 })
 export class ContactformComponent implements OnInit {
   constructor(private userService: UserService, private dataService: DataService) { }
+
   isValidFormSubmitted = false;
   user = new User();
   data: [] = []; // storing user information from 
   country: [] = []; //storting country data from api
   max = 10;
 
-  countryApi  =
-  {
-    country: '',
-  };
+  public selectedCountry: string = '';
 
-  onSubmit(){
-    console.log('goo')
+  onChange(newValue) {
+    this.selectedCountry = newValue;
+
   }
+  // selectCountry = null;
+
+  // onSubmit(){
+  //   console.log('goo')
+  // }
 
   model:any ={}
 

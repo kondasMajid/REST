@@ -1,6 +1,6 @@
 export class User {
     name: string;
     email: string;
-    country:string;
+    selectedCountry:string;
 
 }
