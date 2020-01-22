@@ -41,7 +41,7 @@ export class ContactformComponent implements OnInit {
 displayCountries(){
   this.dataService.getCountries().subscribe(y => {
     this.country = y.payload.items;
-    console.log('---',this.country)
+    console.log('---', this.country)
   })
 }
 
