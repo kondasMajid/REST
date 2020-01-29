@@ -10,6 +10,9 @@ export class DataService {
   data;
   apis = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 
+  // token = 'klloyds-user-token';
+  // value = 'B2A8AA92FE13A3FFD83FEF159A47A7E8';
+
   constructor(private http: HttpClient) {  }
 
    headerDict = {
@@ -26,6 +29,7 @@ export class DataService {
        return this.http.get(this.apis, this.requestOptions );
   }
 
+  // get list of countries
   getCountries(){
     return this.http.get(this.countryApi, this.requestOptions)
   }
