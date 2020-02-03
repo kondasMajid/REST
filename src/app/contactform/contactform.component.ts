@@ -37,7 +37,7 @@ export class ContactformComponent implements OnInit {
 
 }
 
-// method to display  countries
+// method to display  countries fomr the api
 displayCountries(){
   this.dataService.getCountries().subscribe(y => {
     this.country = y.payload.items;
@@ -52,6 +52,7 @@ displayCountries(){
   }
 
 
+  //form validation  on submit
   onFormSubmit(form: NgForm) {
     this.isValidFormSubmitted = false;
     if (form.invalid) {
