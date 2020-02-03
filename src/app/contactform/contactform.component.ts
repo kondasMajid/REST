@@ -20,6 +20,7 @@ export class ContactformComponent implements OnInit {
 
   public selectedCountry: string = '';
 
+  // country selection drop down
   onChange(newValue) {
     this.selectedCountry = newValue;
 
