@@ -10,6 +10,7 @@ import { DataService } from '../data.service';
   styleUrls: ['./contactform.component.css']
 })
 export class ContactformComponent implements OnInit {
+
   constructor(private userService: UserService, private dataService: DataService) { }
 
   isValidFormSubmitted = false;
@@ -23,7 +24,6 @@ export class ContactformComponent implements OnInit {
   // country selection drop down
   onChange(newValue) {
     this.selectedCountry = newValue;
-
   }
   
 
