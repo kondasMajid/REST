@@ -35,7 +35,6 @@ export class ContactformComponent implements OnInit {
       this.data = x.payload.items;
       console.log(this.data);
     });
-
 }
 
 // method to display  countries fomr the api
