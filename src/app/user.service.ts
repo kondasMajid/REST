@@ -8,7 +8,7 @@ export class UserService {
 
   createUser(user: User) {
     console.log('User Name: ' + user.name);
-  console.log('email: ' + user.email);
+    console.log('email: ' + user.email);
   }
   
   constructor() { }
