@@ -6,12 +6,12 @@ import { HttpClient,HttpHeaders , HttpErrorResponse } from '@angular/common/http
 })
 
 export class DataService {
-  countryApi = 'http://18.191.141.83/v1/countries';
+  countryApi = 'xxxxxxxxxxxxxxxxxxxxxxxx';
   data;
-  apis = 'http://18.191.141.83/v1/users/237/deliveries';
+  apis = 'xxxxxxxxxxxxxxxxxxxxxxxxx';
 
-  token = 'klloyds-user-token';
-  value = 'B2A8AA92FE13A3FFD83FEF159A47A7E8';
+  token = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+  value = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 
   constructor(private http: HttpClient) {  }
 
